@@ -10,9 +10,9 @@ new Time(2008, 1).previousMonth();                    // December 1th 2007, 00:0
 new Time(1804).isLeapYear();                          // true
 </code></pre>
 
-h1. Usage/installation
+h1. Installing
 
-# Download the JS: [TODO: a link, please]
+# Download the JS: http://github.com/augustl/js-time/raw/master/time.js
 # Include it on your page
 # Have lunch
 
