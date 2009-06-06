@@ -12,7 +12,7 @@ new Time(1804).isLeapYear();                          // true
 
 h1. Installing
 
-# Download the JS: http://github.com/augustl/js-time/raw/master/time.js
+# Download the JS: "http://github.com/augustl/js-time/raw/master/time.js":http://github.com/augustl/js-time/raw/master/time.js
 # Include it on your page
 # Have lunch
 
