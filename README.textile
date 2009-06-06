@@ -1,0 +1,32 @@
+h1. JS-Time
+
+A framework agnostic Javascript utility class, performing time calculations. Piggybacks on <code>Date</code>, adding a bunch of utility functions.
+
+<pre><code>
+new Time(2008, 5, 17).beginningOfYear();              // January 1th 2008, 00:00
+new Time(2008, 5, 17, 23, 52).beginningOfDay();       // January 5th 2008, 00:00
+new Time(2008, 12, 24, 18, 00).advance({months: 2});  // February 24th 2009, 18:00
+new Time(2008, 1).previousMonth();                    // December 1th 2007, 00:00
+new Time(1804).isLeapYear();                          // true
+</code></pre>
+
+h1. Usage/installation
+
+# Download the JS: [TODO: a link, please]
+# Include it on your page
+# Have lunch
+
+h1. Remember: Changing the stime mutates the receiver
+
+When you run operations such as <code>beginningOfYear()</code>, <code>advance({month: 5})</code> and so on, you change the receiver. If you intended to create a new Time instance, you have to <code>clone()</code> by hand.
+
+<pre><code>var now = new Time();
+now.month() // 4
+now.beginningOfYear();
+now.month() // 1
+
+var now = new Time();
+now.month() // 4
+now.clone().beginningOfYear().month() // 1
+now.month() // 4</code></pre>
+
