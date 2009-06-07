@@ -45,8 +45,7 @@ JS-Time provides the following time-stepping functions:
 
 Some usage examples.
 
-<pre><code>
-new Time(2008, 5, 17).beginningOfYear();              // January 1th 2008, 00:00
+<pre><code>new Time(2008, 5, 17).beginningOfYear();              // January 1th 2008, 00:00
 new Time(2008, 5, 17, 23, 52).beginningOfDay();       // January 5th 2008, 00:00
 new Time(2008, 5, 17, 30).endOfHour()                 // January 5th 2008, 17:59
 new Time(2008, 1).previousMonth();                    // December 1th 2007, 00:00
@@ -60,8 +59,7 @@ h3. clone
 
 Clones and returns a copy of the <code>Time</code> instance.
 
-<pre><code>
-var time = new Time(2006);
+<pre><code>var time = new Time(2006);
 var timeClone = time.clone().setYear(1999)
 time.year()                                         // 2006
 timeClone.year()                                    // 1999
@@ -71,9 +69,7 @@ h3. isLeapYear
 
 Returns true ore false, depending on wether or not the year in question is a leap year.
 
-<pre><code>
-new Time(1804).isLeapYear();                          // true
-</code></pre>
+<pre><code>new Time(1804).isLeapYear();                          // true</code></pre>
 
 h1. Installing/using
 
