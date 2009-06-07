@@ -2,6 +2,8 @@ h1. JS-Time
 
 A framework agnostic Javascript utility class, performing time calculations. Piggybacks on <code>Date</code>, adding a bunch of utility functions.
 
+Coming soon in a version near you: <code>advance({monts: 5})</code>, <code>advance({days: -8})</code> and <code>beginningOfWeek()</code>.
+
 h1. Features
 
 h2. Creating new time instances
