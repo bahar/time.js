@@ -2,31 +2,81 @@ h1. JS-Time
 
 A framework agnostic Javascript utility class, performing time calculations. Piggybacks on <code>Date</code>, adding a bunch of utility functions.
 
+h1. Features
+
+h2. Creating new time instances
+
+Use regular Javascript constructors to create new <code>Time</code> instances.
+
+<pre><code>new Time();
+new Time(208, 5, 17);
+new Time().epoch(1244405763000) // Remember: JS uses milliseconds, not seconds</code></pre>
+
+h2. Getting and setting time attributes
+
+You can set the following attributes:
+
+* <code>year</code>
+* <code>month</code>
+* <code>hour</code>
+* <code>minute</code>
+* <code>second</code>
+* <code>millisecond</code>
+* <code>epoch</code> (UNIX time in milliseconds)
+
+Here's the syntax.
+
+<pre><code>var time = new Time();
+time.hour();
+time.hour(17);</code></pre>
+
+h2. Time-stepping
+
+JS-Time provides the following time-stepping functions:
+
+* beginningOf/endOF
+** year
+** month
+** day
+** hour
+** minute
+* previousMonth
+* nextMonth()
+
+Some usage examples.
+
 <pre><code>
 new Time(2008, 5, 17).beginningOfYear();              // January 1th 2008, 00:00
 new Time(2008, 5, 17, 23, 52).beginningOfDay();       // January 5th 2008, 00:00
-new Time(2008, 12, 24, 18, 00).advance({months: 2});  // February 24th 2009, 18:00
+new Time(2008, 5, 17, 30).endOfHour()                 // January 5th 2008, 17:59
 new Time(2008, 1).previousMonth();                    // December 1th 2007, 00:00
+</code></pre>
+
+Keep in mind that all of these functions mutates the receiver, they do not create new <code>Time</code> instances. If you want to create new instances, use <code>clone</code> (documentation below).
+
+h2. Utility
+
+h3. clone
+
+Clones and returns a copy of the <code>Time</code> instance.
+
+<pre><code>
+var time = new Time(2006);
+var timeClone = time.clone().setYear(1999)
+time.year()                                         // 2006
+timeClone.year()                                    // 1999
+</code></pre>
+
+h3. isLeapYear
+
+Returns true ore false, depending on wether or not the year in question is a leap year.
+
+<pre><code>
 new Time(1804).isLeapYear();                          // true
 </code></pre>
 
-h1. Installing
+h1. Installing/using
 
 # Download the JS: "http://github.com/augustl/js-time/raw/master/time.js":http://github.com/augustl/js-time/raw/master/time.js
 # Include it on your page
 # Have lunch
-
-h1. Remember: Changing the stime mutates the receiver
-
-When you run operations such as <code>beginningOfYear()</code>, <code>advance({month: 5})</code> and so on, you change the receiver. If you intended to create a new Time instance, you have to <code>clone()</code> by hand.
-
-<pre><code>var now = new Time();
-now.month() // 4
-now.beginningOfYear();
-now.month() // 1
-
-var now = new Time();
-now.month() // 4
-now.clone().beginningOfYear().month() // 1
-now.month() // 4</code></pre>
-
