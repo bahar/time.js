@@ -58,6 +58,12 @@
     return newTime.daysInMonth() == 29;
   }
   
+  Time.prototype.daysInMonth = function(){
+    var nextMonth = this.clone().nextMonth();
+    nextMonth.epoch(nextMonth.epoch() - 3600);
+    return nextMonth.date.getDate();
+  }
+  
   /////////////////////////////////////
   // Stepping
   Time.prototype.beginningOfYear = function(){
@@ -118,14 +124,6 @@
   Time.prototype.endOfMinute = function(){
     this.second(59);
     return this;
-  }
-  
-  // ------------
-  
-  Time.prototype.daysInMonth = function(){
-    var nextMonth = this.clone().nextMonth();
-    nextMonth.epoch(nextMonth.epoch() - 3600);
-    return nextMonth.date.getDate();
   }
   
   // ------------
