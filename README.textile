@@ -34,14 +34,14 @@ h2. Time-stepping
 
 JS-Time provides the following time-stepping functions:
 
-* beginningOf/endOF
-** year
-** month
-** day
-** hour
-** minute
-* previousMonth
-* nextMonth()
+* <code>beginningOf</code>/<code>endOF</code>
+** <code>year</code>
+** <code>month</code>
+** <code>day</code>
+** <code>hour</code>
+** <code>minute</code>
+* <code>previousMonth</code>
+* <code>nextMonth</code>
 
 Some usage examples.
 
