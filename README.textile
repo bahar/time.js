@@ -47,7 +47,8 @@ Some usage examples.
 
 <pre><code>new Time(2008, 5, 17).beginningOfYear();              // January 1th 2008, 00:00
 new Time(2008, 5, 17, 23, 52).beginningOfDay();       // January 5th 2008, 00:00
-new Time(2008, 5, 17, 30).endOfHour()                 // January 5th 2008, 17:59
+new Time(2008, 5, 17, 16, 30).endOfHour()             // January 5th 2008, 16:59
+new Time(2008, 5, 17).endOfYear()                     // December 31th 2008, 23:59
 new Time(2008, 1).previousMonth();                    // December 1th 2007, 00:00
 </code></pre>
 
