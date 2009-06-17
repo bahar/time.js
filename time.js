@@ -52,11 +52,10 @@
     return newTime;
   }
   
-  Time.prototype.isLeapYear = function(){
-    var newTime = this.clone();
-    newTime.month(2);
-    return newTime.daysInMonth() == 29;
-  }
+	Time.prototype.isLeapYear = function(){
+		var year = this.year();
+		return (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)
+	}
   
   Time.prototype.daysInMonth = function(){
     var nextMonth = this.clone().nextMonth();
