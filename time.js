@@ -10,6 +10,11 @@
       }
     }
   }
+
+	Time.DAYS_IN_MONTH = [
+		// Starts at [1].
+		null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+	]
   
   /////////////////////////////////////
   // The accessors. Uses the same function for both getting and
@@ -58,9 +63,11 @@
 	}
   
   Time.prototype.daysInMonth = function(){
-    var nextMonth = this.clone().nextMonth();
-    nextMonth.epoch(nextMonth.epoch() - 3600);
-    return nextMonth.date.getDate();
+		if (this.month() == 2 && this.isLeapYear()) {
+			return 29;
+		}
+		
+		return Time.DAYS_IN_MONTH[this.month()]
   }
   
   /////////////////////////////////////
