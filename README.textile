@@ -80,7 +80,7 @@ new Time(2007, 4).daysInMonth();                    // 30</code></pre>
 
 h3. isLeapYear
 
-Returns true ore false, depending on wether or not the year in question is a leap year.
+Returns true or false, depending on wether or not the year in question is a leap year.
 
 <pre><code>new Time(1804).isLeapYear();                          // true</code></pre>
 
