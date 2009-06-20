@@ -50,7 +50,7 @@ JS-Time provides the following time-stepping functions:
 
 Some usage examples.
 
-<pre><code>new Time(2008, 5, 17).beginningOfYear();              // January 1th 2008, 00:00
+<pre><code>new Time(2008, 5, 17).beginningOfYear();              // January 1st 2008, 00:00
 new Time(2008, 5, 17, 23, 52).beginningOfDay();       // May 5th 2008, 00:00
 new Time(2008, 5, 17, 16, 30).endOfHour()             // May 5th 2008, 16:59
 new Time(2008, 5, 17).endOfYear()                     // December 31th 2008, 23:59
