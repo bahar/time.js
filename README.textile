@@ -25,12 +25,19 @@ You can set the following attributes:
 * <code>second</code>
 * <code>millisecond</code>
 * <code>epoch</code> (UNIX time in milliseconds)
+* <code>weekday</code> (1-7)
 
 Here's the syntax.
 
 <pre><code>var time = new Time();
 time.hour();
 time.hour(17);</code></pre>
+
+h2. Setting the first day of the week
+
+When using <code>weekday</code>, <code>firstDayInCalendarMonth</code> and similar, the library uses <code>Time.firstDayOfWeek</code> in these calculations. This is <code>1</code> (sunday) by default. Set it to any value between 1 and 7.
+
+<pre><code>Time.firstDayOfWeek = 2; // defaults to 1</code></pre>
 
 h2. Time-stepping
 
@@ -43,7 +50,7 @@ JS-Time provides the following time-stepping functions:
 ** <code>hour</code>
 ** <code>minute</code>
 ** <code>week</code>
-<code>previousMonth</code>
+* <code>previousMonth</code>
 * <code>nextMonth</code>
 * <code>advanceMonths</code>
 * <code>advanceDays</code>
@@ -91,7 +98,7 @@ Returns true or false, depending on wether or not the year in question is a leap
 
 h3. firstDayInCalendarMonth
 
-Useful when rendering month calendar grids. Set the first day of the month with <code>Time.firstDayOfWeek = 2</code>. It defaults to <code>1</code>, which is sunday.
+Useful when rendering month calendar grids.  Uses <code>Time.firstDayOfWeek</code>.
 
 <pre><code>new Time(2008, 1).firstDayInCalendarMonth()          // December 30th 2007
 new Time(2008, 4).firstDayInCalendarMonth()         // March 30th 2008
@@ -99,7 +106,7 @@ new Time(2008, 4).firstDayInCalendarMonth()         // March 30th 2008
 
 h3. weeksInMonth
 
-Also useful for calendar, also using <code>Time.firstDayOfWeek</code>.
+Also useful for calendar. Uses <code>Time.firstDayOfWeek</code>.
 
 <pre><code>new Time(2008, 2).weeksInMonth()                     // 5
 new Time(2008, 3).weeksInMonth()                    // 6</code></pre>
