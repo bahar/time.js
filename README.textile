@@ -4,8 +4,6 @@ A framework agnostic Javascript utility class, performing time calculations. Pig
 
 The test suite runs successfully on IE6, IE7, Safari 4 Beta (mac), Firefox 3.5 (mac) and Opera 9 (mac).
 
-Coming soon in a version near you: <code>advance({monts: 5})</code>, <code>advance({days: -8})</code> and <code>beginningOfWeek()</code>.
-
 h1. Features
 
 h2. Creating new time instances
