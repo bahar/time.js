@@ -1,16 +1,21 @@
 --~~ JS-Time ~~--
 
-    A framework agnostic Javascript utility class, performing 
+	A framework agnostic Javascript utility class, performing 
 	time calculations. Piggybacks on <code>Date</code>, adding
 	a bunch of utility functions.
 
 	The test suite runs successfully on IE6-IE8, Safari 3 and 4,
 	Firefox 3 and Opera 9. Probably more, send me a message if
 	you ran the tests successfully in an unlisted browser.
+	
+--~~ Installing/using ~~--
+
+	1. Download the JS, http://github.com/augustl/js-time/raw/master/time.js
+	2. Include it on your page
 
 --~~ Features ~~--
 
-	-~ Creating new time instances
+	-~ Creating new time instances ~-
 
 	Use regular Javascript constructors to create new
 	<code>Time</code> instances.
@@ -127,9 +132,3 @@ new Time(2008, 4).firstDayInCalendarMonth()         // March 30th 2008
 
 new Time(2008, 2).weeksInMonth()                    // 5
 new Time(2008, 3).weeksInMonth()                    // 6
-
---~~ Installing/using ~~--
-
-1. Download the JS at http://github.com/augustl/js-time/raw/master/time.js
-2. Include it on your page
-3. Have lunch
