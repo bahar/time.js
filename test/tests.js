@@ -146,7 +146,6 @@ test("days in month", function(){
 });
 
 test("first day in calendar month", function(){
-	console.log(new Time(2008, 1).firstDayInCalendarMonth().date)
 	equals(new Time(2008, 1).firstDayInCalendarMonth().s(), new Time(2007, 12, 30).s());
 	equals(new Time(2008, 2).firstDayInCalendarMonth().s(), new Time(2008, 1, 27).s());
 	equals(new Time(2008, 3).firstDayInCalendarMonth().s(), new Time(2008, 2, 24).s());
