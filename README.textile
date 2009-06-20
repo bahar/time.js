@@ -46,6 +46,8 @@ JS-Time provides the following time-stepping functions:
 ** <code>minute</code>
 * <code>previousMonth</code>
 * <code>nextMonth</code>
+* <code>advanceMonths</code>
+* <code>advanceDays</code>
 
 Some usage examples.
 
@@ -54,6 +56,10 @@ new Time(2008, 5, 17, 23, 52).beginningOfDay();       // May 5th 2008, 00:00
 new Time(2008, 5, 17, 16, 30).endOfHour()             // May 5th 2008, 16:59
 new Time(2008, 5, 17).endOfYear()                     // December 31th 2008, 23:59
 new Time(2008, 1).previousMonth();                    // December 1th 2007, 00:00
+new Time(2007, 1, 31).advanceMonths(1)                // February 28th 2007
+new Time(2008, 1, 31).advanceMonths(1)                // February 29th 2008
+new Time(2008, 1, 3).advanceMonths(-13)               // December 3rd 2006
+new Time(2008, 5, 17, 16, 30).advanceDays(1)          // May 18th 2008, 16:30
 </code></pre>
 
 Keep in mind that all of these functions mutates the receiver, they do not create new <code>Time</code> instances. If you want to create new instances, use <code>clone</code> (documentation below).
@@ -83,6 +89,14 @@ h3. isLeapYear
 Returns true or false, depending on wether or not the year in question is a leap year.
 
 <pre><code>new Time(1804).isLeapYear();                          // true</code></pre>
+
+h3. firstDayInCalendarMonth()
+
+Useful when rendering month calendar grids. Set the first day of the month with <code>Time.firstDayOfMonth = 1</code>. It defaults to <code>0</code>, which is sunday.
+
+<pre><code>new Time(2008, 1).firstDayInCalendarMonth()          // December 30th 2007
+new Time(2008, 4).firstDayInCalendarMonth()         // March 30th 2008
+</code></pre>
 
 h1. Installing/using
 

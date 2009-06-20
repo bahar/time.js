@@ -11,6 +11,7 @@
     }
   }
 
+	Time.firstDayOfMonth = 0;
 	Time.DAYS_IN_MONTH = [
 		// Starts at [1].
 		null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
@@ -32,20 +33,20 @@
   // Month gets special treatment, to avoid zero indexing from Date.
   Time.prototype.month = function(value) {
     if (value) {
-      return this.date.setMonth(value - 1);
+      this.date.setMonth(value - 1);
     } else {
       return this.date.getMonth() + 1;
     }
   }
-  
+
   Time.accessor("year", "FullYear");
   // month: see above
-  Time.accessor("day", "Date");
+	Time.accessor("day", "Date")
   Time.accessor("hour", "Hours");
   Time.accessor("minute", "Minutes");
   Time.accessor("second", "Seconds");
   Time.accessor("millisecond", "Milliseconds");
-  //Time.accessor("weekday");
+	Time.accessor("weekday", "Day");
   Time.accessor("epoch", "Time");
   
   /////////////////////////////////////
@@ -59,7 +60,7 @@
   
 	Time.prototype.isLeapYear = function(){
 		var year = this.year();
-		return (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)
+		return (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
 	}
   
   Time.prototype.daysInMonth = function(){
@@ -69,6 +70,13 @@
 		
 		return Time.DAYS_IN_MONTH[this.month()]
   }
+	
+	Time.prototype.firstDayInCalendarMonth = function(){
+		this.beginningOfMonth();
+		var offset = this.weekday() - Time.firstDayOfMonth;
+		this.advanceDays(-offset);
+		return this;
+	}
   
   /////////////////////////////////////
   // Stepping
@@ -148,9 +156,43 @@
   
   // ------------
   
-  Time.prototype.advance = function(opts) {
-    
+  Time.prototype.advanceDays = function(days) {
+		// I honestly don't know what I'm doing here. The beginningOfDay()
+		// stuff really sucks.
+		var milliseconds
+		if (days < -1) {
+			milliseconds = (86400000 * days) + 3600000
+		} else {
+			milliseconds = 86400000 * days;
+		}
+		this.epoch(this.epoch() + milliseconds);
+		this.beginningOfDay()
+		return this;
   }
+	
+	Time.prototype.advanceMonths = function(months) {
+		var base = this.year() * 12 + (this.month() - 1) + months;
+		var newYear = Math.floor(base / 12);
+		var newMonth = (base % 12) + 1;
+
+		// Giving setting the month to '2' on january 31th
+		// gives us march 2nd. Circumventing this.
+		var newTime = new Time(newYear, newMonth);
+		var daysInNewTimeMonth = newTime.daysInMonth()
+		
+		if (this.day() > daysInNewTimeMonth) {
+			this.year(newYear)
+			this.day(1)
+			this.month(newMonth)
+			this.day(daysInNewTimeMonth)
+		} else {
+			this.year(newYear)
+			this.month(newMonth)
+		}
+		
+		return this;
+	}
+	
   
   // Todo: Some kind of noConflict() thing, in case people have a 'Time' around already.
   window.Time = Time;

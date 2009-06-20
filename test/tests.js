@@ -93,6 +93,39 @@ test("days in month", function(){
   equals(new Time(2008, 10).daysInMonth(), 31);
   equals(new Time(2008, 11).daysInMonth(), 30);
   equals(new Time(2008, 12).daysInMonth(), 31);
+});
+
+test("first day in calendar month", function(){
+	equals(new Time(2008, 1).firstDayInCalendarMonth().s(), new Time(2007, 12, 30).s());
+	equals(new Time(2008, 2).firstDayInCalendarMonth().s(), new Time(2008, 1, 27).s());
+	equals(new Time(2008, 3).firstDayInCalendarMonth().s(), new Time(2008, 2, 24).s());
+	
+	equals(new Time(2008, 4).firstDayInCalendarMonth().s(), new Time(2008, 3, 30).s());
+	
+	Time.firstDayOfMonth = 1;
+	equals(new Time(2008, 3).firstDayInCalendarMonth().s(), new Time(2008, 2, 25).s());
+	Time.firstDayOfMonth = 0;
+})
+
+test("advance days", function(){
+	equals(new Time(2008, 5, 17).advanceDays(1).s(), new Time(2008, 5, 18).s());
+	equals(new Time(2008, 5, 17).advanceDays(-1).s(), new Time(2008, 5, 16).s());
+	equals(new Time(2008, 5, 17).advanceDays(-10).s(), new Time(2008, 5, 7).s());
+	
+	equals(new Time(2008, 5, 17).advanceDays(20).s(), new Time(2008, 6, 6).s());
+	equals(new Time(2008, 5, 17).advanceDays(-20).s(), new Time(2008, 4, 27).s());
+
+	// This will break with a simple epoch() implementation.
+	equals(new Time(2008, 4).advanceDays(-2).s(), new Time(2008, 3, 30).s());
+})
+
+test("advance month", function(){
+	equals(new Time(2008, 5).advanceMonths(1).s(), new Time(2008, 6).s());
+	equals(new Time(2008, 1).advanceMonths(-1).s(), new Time(2007, 12).s());
+	equals(new Time(2008, 1, 31).advanceMonths(1).s(), new Time(2008, 2, 29).s()); // 2008 is a leap year
+	equals(new Time(2007, 12, 31).advanceMonths(2).s(), new Time(2008, 2, 29).s());
+	equals(new Time(2007, 1, 31).advanceMonths(1).s(), new Time(2007, 2, 28).s())
+	equals(new Time(2008, 1, 3).advanceMonths(-13).s(), new Time(2006, 12, 3).s())
 })
 
 test("next and previous month", function(){
