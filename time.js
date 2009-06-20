@@ -12,11 +12,12 @@
   }
 
   Time.firstDayOfWeek = 1;
-  Time.DAYS_IN_MONTH = [
+  var DAYS_IN_MONTH = [
     // Starts at [1].
     null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
   ]
-  Time.MILLISECONDS_IN_WEEK = 604800000.0;
+  var MILLISECONDS_IN_WEEK = 604800000.0;
+  var THIRTY_TWO_DAYS = 2764800000;
 
   /////////////////////////////////////
   // The accessors. Uses the same function for both getting and
@@ -30,6 +31,16 @@
       }
     }
   }
+  
+  Time.accessor("year", "FullYear");
+  // month: see below
+  Time.accessor("day", "Date")
+  Time.accessor("hour", "Hours");
+  Time.accessor("minute", "Minutes");
+  Time.accessor("second", "Seconds");
+  Time.accessor("millisecond", "Milliseconds");
+  // weekday: See below
+  Time.accessor("epoch", "Time");
 
   // Month gets special treatment, to avoid zero indexing from Date.
   Time.prototype.month = function(value) {
@@ -52,16 +63,6 @@
     }
   }
 
-  Time.accessor("year", "FullYear");
-  // month: see above
-  Time.accessor("day", "Date")
-  Time.accessor("hour", "Hours");
-  Time.accessor("minute", "Minutes");
-  Time.accessor("second", "Seconds");
-  Time.accessor("millisecond", "Milliseconds");
-  // weekday: See above
-  Time.accessor("epoch", "Time");
-
   /////////////////////////////////////
   // Utility
   Time.prototype.clone = function(){
@@ -81,12 +82,12 @@
       return 29;
     }
 
-    return Time.DAYS_IN_MONTH[this.month()]
+    return DAYS_IN_MONTH[this.month()]
   }
 
   Time.prototype.weeksInMonth = function(){
     var millisecondsInThisMonth = this.clone().endOfMonth().epoch() - this.clone().firstDayInCalendarMonth().epoch()
-    return Math.ceil(millisecondsInThisMonth / Time.MILLISECONDS_IN_WEEK)
+    return Math.ceil(millisecondsInThisMonth / MILLISECONDS_IN_WEEK)
   }
 
   Time.prototype.firstDayInCalendarMonth = function(){
@@ -162,7 +163,7 @@
   // ------------
 
   Time.prototype.nextMonth = function(){
-    this.epoch(this.beginningOfMonth().epoch() + 2764800000); // 32 days
+    this.epoch(this.beginningOfMonth().epoch() + THIRTY_TWO_DAYS);
     this.beginningOfMonth();
     return this;
   }
@@ -194,7 +195,7 @@
     var newYear = Math.floor(base / 12);
     var newMonth = (base % 12) + 1;
 
-    // Giving setting the month to '2' on january 31th
+    // Setting the month to '2' on january 31th
     // gives us march 2nd. Circumventing this.
     var newTime = new Time(newYear, newMonth);
     var daysInNewTimeMonth = newTime.daysInMonth()
