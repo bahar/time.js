@@ -11,7 +11,7 @@
     }
   }
 
-	Time.firstDayOfMonth = 0;
+	Time.firstDayOfWeek = 1;
 	Time.DAYS_IN_MONTH = [
 		// Starts at [1].
 		null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
@@ -40,6 +40,18 @@
     }
   }
 
+	// There is no setDay(), implementing that here.
+	Time.prototype.weekday = function(value) {
+		if (value) {
+			this.advanceDays(value - this.weekday());
+		} else {
+			var a = (this.date.getDay() - Time.firstDayOfWeek) + 1;
+			var b = 7;
+			var ringModulo = a - Math.floor(a / b) * b;
+			return ringModulo + 1
+		}
+	}
+
   Time.accessor("year", "FullYear");
   // month: see above
 	Time.accessor("day", "Date")
@@ -47,7 +59,7 @@
   Time.accessor("minute", "Minutes");
   Time.accessor("second", "Seconds");
   Time.accessor("millisecond", "Milliseconds");
-	Time.accessor("weekday", "Day");
+	// weekday: See above
   Time.accessor("epoch", "Time");
   
   /////////////////////////////////////
@@ -79,8 +91,7 @@
 	
 	Time.prototype.firstDayInCalendarMonth = function(){
 		this.beginningOfMonth();
-		var offset = this.weekday() - Time.firstDayOfMonth;
-		this.advanceDays(-offset);
+		this.weekday(1);
 		return this;
 	}
   
@@ -97,7 +108,8 @@
   }
   
   Time.prototype.beginningOfWeek = function(){
-    // ...
+		this.weekday(1); this.beginningOfDay();
+		return this;
   }
   
   Time.prototype.beginningOfDay = function(){
@@ -128,7 +140,8 @@
   }
   
   Time.prototype.endOfWeek = function(){
-    // ...
+		this.weekday(7); this.endOfDay();
+		return this;
   }
   
   Time.prototype.endOfDay = function(){

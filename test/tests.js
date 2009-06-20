@@ -18,6 +18,42 @@ test("basic accessors", function(){
   equals(now.day(), 5);
 });
 
+test("weekday", function(){
+	equals(1, new Time(2008, 5, 11).weekday());
+	equals(7, new Time(2008, 5, 17).weekday());
+	
+	var time = new Time(2008, 5, 16);
+	time.weekday(1);
+	equals(1, time.weekday());
+	equals(new Time(2008, 5, 11).s(), time.s());
+	
+	var time = new Time(2008, 5, 12);
+	time.weekday(7);
+	equals(7, time.weekday());
+	equals(new Time(2008, 5, 17).s(), time.s());
+	
+	Time.firstDayOfWeek = 2
+	
+	equals(6, new Time(2008, 5, 17).weekday())
+	equals(7, new Time(2008, 5, 18).weekday())
+	
+	var time = new Time(2008, 5, 17);
+	time.weekday(1);
+	equals(1, time.weekday());
+	equals(new Time(2008, 5, 12).s(), time.s());
+	
+	var time = new Time(2008, 5, 13);
+	time.weekday(7);
+	equals(7, time.weekday());
+	equals(new Time(2008, 5, 18).s(), time.s());
+	
+	Time.firstDayOfWeek = 5;
+	equals(1, new Time(2008, 5, 15).weekday());
+	equals(7, new Time(2008, 5, 21).weekday());
+	
+	Time.firstDayOfWeek = 1
+});
+
 test("creating instance defaults to now", function(){
   expect(2);
   var now = new Time();
@@ -60,16 +96,22 @@ test("isLeapYear", function(){
 module("Stepping");
 
 test("beginning", function(){
-  expect(5);
   equals(new Time(2008, 1, 0, 0, 0).s(),    new Time(2008, 5, 17, 15, 30).beginningOfYear().s());
   equals(new Time(2008, 5, 0, 0, 0).s(),    new Time(2008, 5, 17, 15, 30).beginningOfMonth().s());
   equals(new Time(2008, 5, 17, 0, 0).s(),   new Time(2008, 5, 17, 15, 30).beginningOfDay().s());
   equals(new Time(2008, 5, 17, 15, 0).s(),  new Time(2008, 5, 17, 15, 30).beginningOfHour().s());
   equals(new Time(2008, 5, 17, 15, 30).s(), new Time(2008, 5, 17, 15, 30).beginningOfMinute().s());
+
+	equals(new Time(2008, 5, 17).beginningOfWeek().s(), new Time(2008, 5, 11).s())
+	
+	Time.firstDayOfWeek = 2;
+	
+	equals(new Time(2008, 5, 17).beginningOfWeek().s(), new Time(2008, 5, 12).s())
+	
+	Time.firstDayOfWeek = 1;
 });
 
 test("end", function(){
-  expect(6);
   equals(new Time(2008, 12, 31, 23, 59, 59, 999).s(), new Time(2008, 5, 17, 15, 30).endOfYear().s());
   
   equals(new Time(2008, 1, 31, 23, 59, 59, 999).s(), new Time(2008, 1, 23).endOfMonth().s(), "january should have 31 days");
@@ -78,6 +120,14 @@ test("end", function(){
   equals(new Time(2008, 5, 17, 23, 59, 59, 999).s(), new Time(2008, 5, 17, 15, 30).endOfDay().s());
   equals(new Time(2008, 5, 17, 15, 59, 59, 999).s(), new Time(2008, 5, 17, 15, 30).endOfHour().s());
   equals(new Time(2008, 5, 17, 15, 30, 59, 999).s(), new Time(2008, 5, 17, 15, 30, 23).endOfMinute().s());
+
+	equals(new Time(2008, 5, 12).endOfWeek().s(), new Time(2008, 5, 17).endOfDay().s())
+	
+	Time.firstDayOfWeek = 2;
+	
+	equals(new Time(2008, 5, 17).endOfWeek().s(), new Time(2008, 5, 18).endOfDay().s())
+	
+	Time.firstDayOfWeek = 1;
 });
 
 test("days in month", function(){
@@ -96,15 +146,17 @@ test("days in month", function(){
 });
 
 test("first day in calendar month", function(){
+	console.log(new Time(2008, 1).firstDayInCalendarMonth().date)
 	equals(new Time(2008, 1).firstDayInCalendarMonth().s(), new Time(2007, 12, 30).s());
 	equals(new Time(2008, 2).firstDayInCalendarMonth().s(), new Time(2008, 1, 27).s());
 	equals(new Time(2008, 3).firstDayInCalendarMonth().s(), new Time(2008, 2, 24).s());
 	
 	equals(new Time(2008, 4).firstDayInCalendarMonth().s(), new Time(2008, 3, 30).s());
-	
-	Time.firstDayOfMonth = 1;
-	equals(new Time(2008, 3).firstDayInCalendarMonth().s(), new Time(2008, 2, 25).s());
-	Time.firstDayOfMonth = 0;
+
+	Time.firstDayOfWeek = 2;
+	equals(new Time(2008, 4, 1).firstDayInCalendarMonth().s(), new Time(2008, 3, 31).s())
+	equals(new Time(2008, 3, 1).firstDayInCalendarMonth().s(), new Time(2008, 2, 25).s());
+	Time.firstDayOfWeek = 1;
 })
 
 test("advance days", function(){
@@ -135,7 +187,6 @@ test("next and previous month", function(){
   equals(new Time(2008, 4, 1).s(), new Time(2008, 5, 17).previousMonth().s());
   equals(new Time(2007, 12, 1).s(), new Time(2008, 1, 5).previousMonth().s());
 });
-
 
 test("weeks in month", function(){
 	equals(new Time(2008, 1).weeksInMonth(), 5);
