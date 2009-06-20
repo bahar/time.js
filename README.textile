@@ -88,13 +88,20 @@ Returns true or false, depending on wether or not the year in question is a leap
 
 <pre><code>new Time(1804).isLeapYear();                          // true</code></pre>
 
-h3. firstDayInCalendarMonth()
+h3. firstDayInCalendarMonth
 
 Useful when rendering month calendar grids. Set the first day of the month with <code>Time.firstDayOfMonth = 1</code>. It defaults to <code>0</code>, which is sunday.
 
 <pre><code>new Time(2008, 1).firstDayInCalendarMonth()          // December 30th 2007
 new Time(2008, 4).firstDayInCalendarMonth()         // March 30th 2008
 </code></pre>
+
+h3. weeksInMonth
+
+Also useful for calendar, also using <code>Time.firstDayOfMonth</code>.
+
+<pre><code>new Time(2008, 2).weeksInMonth()                     // 5
+new Time(2008, 3).weeksInMonth()                    // 6</code></pre>
 
 h1. Installing/using
 

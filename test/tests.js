@@ -135,3 +135,19 @@ test("next and previous month", function(){
   equals(new Time(2008, 4, 1).s(), new Time(2008, 5, 17).previousMonth().s());
   equals(new Time(2007, 12, 1).s(), new Time(2008, 1, 5).previousMonth().s());
 });
+
+
+test("weeks in month", function(){
+	equals(new Time(2008, 1).weeksInMonth(), 5);
+	equals(new Time(2008, 2).weeksInMonth(), 5);
+	equals(new Time(2008, 3).weeksInMonth(), 6);
+	equals(new Time(2008, 4).weeksInMonth(), 5);
+	equals(new Time(2008, 5).weeksInMonth(), 5);
+	equals(new Time(2008, 6).weeksInMonth(), 5);
+	equals(new Time(2008, 7).weeksInMonth(), 5);
+	equals(new Time(2008, 8).weeksInMonth(), 6);
+	equals(new Time(2008, 9).weeksInMonth(), 5);
+	equals(new Time(2008, 10).weeksInMonth(), 5);
+	equals(new Time(2008, 11).weeksInMonth(), 6);
+	equals(new Time(2008, 12).weeksInMonth(), 5);
+});

@@ -16,6 +16,7 @@
 		// Starts at [1].
 		null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 	]
+	Time.MILLISECONDS_IN_WEEK = 604800000.0;
   
   /////////////////////////////////////
   // The accessors. Uses the same function for both getting and
@@ -70,6 +71,11 @@
 		
 		return Time.DAYS_IN_MONTH[this.month()]
   }
+	
+	Time.prototype.weeksInMonth = function(){
+		var millisecondsInThisMonth = this.clone().endOfMonth().epoch() - this.clone().firstDayInCalendarMonth().epoch()
+		return Math.ceil(millisecondsInThisMonth / Time.MILLISECONDS_IN_WEEK)
+	}
 	
 	Time.prototype.firstDayInCalendarMonth = function(){
 		this.beginningOfMonth();
