@@ -201,3 +201,16 @@ test("weeks in month", function(){
 	equals(new Time(2008, 11).weeksInMonth(), 6);
 	equals(new Time(2008, 12).weeksInMonth(), 5);
 });
+
+test("setting first day in week on instance scope", function(){
+  equals(1, new Time(2008, 4, 27).weekday())
+  
+  var t = new Time(2008, 4, 28);
+  t.firstDayOfWeek = 2;
+  equals(1, t.weekday());
+
+  // Instance scope overrides global scope.
+  Time.firstDayOfWeek = 4
+  equals(1, t.weekday());
+  Time.firstDayOfWeek = 1
+});

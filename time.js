@@ -56,7 +56,7 @@
     if (value) {
       this.advanceDays(value - this.weekday());
     } else {
-      var a = (this.date.getDay() - Time.firstDayOfWeek) + 1;
+      var a = (this.date.getDay() - (this.firstDayOfWeek || Time.firstDayOfWeek)) + 1;
       var b = 7;
       var ringModulo = a - Math.floor(a / b) * b;
       return ringModulo + 1
@@ -68,6 +68,7 @@
   Time.prototype.clone = function(){
     var newTime = new Time();
     newTime.epoch(this.epoch());
+    newTime.firstDayOfWeek = this.firstDayOfWeek;
 
     return newTime;
   }
