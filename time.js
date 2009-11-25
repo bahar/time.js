@@ -26,6 +26,7 @@
     Time.prototype[name] = function(value) {
       if (value != undefined) {
         this.date["set" + dateFunctionName](value);
+        return this;
       } else {
         return this.date["get" + dateFunctionName]();
       }
