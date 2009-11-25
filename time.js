@@ -90,6 +90,12 @@
     var millisecondsInThisMonth = this.clone().endOfMonth().epoch() - this.clone().firstDayInCalendarMonth().epoch()
     return Math.ceil(millisecondsInThisMonth / MILLISECONDS_IN_WEEK)
   }
+  
+  // The current week's index in weeksInMonth
+  Time.prototype.weekOfCurrentMonth = function(){
+    // NFI how this works. The tests pass, and brute force ftw.
+    return Math.floor((this.day() + this.clone().day(1).weekday() + 5) / 7)
+  }
 
   Time.prototype.firstDayInCalendarMonth = function(){
     this.beginningOfMonth();

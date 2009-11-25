@@ -133,6 +133,22 @@
     	assertEquals(new Time(2008, 12).weeksInMonth(), 5);
     },
     
+    "test week of current month": function () {
+      assertEquals(1, new Time(2008, 11, 1).weekOfCurrentMonth());
+      assertEquals(2, new Time(2008, 11, 2).weekOfCurrentMonth());
+      assertEquals(2, new Time(2008, 11, 8).weekOfCurrentMonth());
+      assertEquals(4, new Time(2008, 11, 18).weekOfCurrentMonth());
+      assertEquals(6, new Time(2008, 11, 30).weekOfCurrentMonth());
+      
+      Time.firstDayOfWeek = 2;
+      
+      assertEquals(1, new Time(2008, 11, 1).weekOfCurrentMonth());
+      assertEquals(1, new Time(2008, 11, 2).weekOfCurrentMonth());
+      assertEquals(2, new Time(2008, 11, 8).weekOfCurrentMonth());
+      assertEquals(4, new Time(2008, 11, 18).weekOfCurrentMonth());
+      assertEquals(5, new Time(2008, 11, 30).weekOfCurrentMonth());
+    },
+    
     "test setting first day of week on instance": function () {
       assertEquals(1, new Time(2008, 4, 27).weekday())
 
