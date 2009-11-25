@@ -6,6 +6,10 @@
   }
   
   TestCase("Base test", {
+    tearDown: function () {
+      Time.firstDayOfWeek = 1;
+    },
+    
     "test basic accessors": function () {
       var now = new Time();
       var date = new Date();
@@ -62,8 +66,6 @@
     	Time.firstDayOfWeek = 5;
     	assertEquals(1, new Time(2008, 5, 15).weekday());
     	assertEquals(7, new Time(2008, 5, 21).weekday());
-
-    	Time.firstDayOfWeek = 1
     },
     
     "test creating instance defaults to now": function () {
@@ -141,11 +143,14 @@
       // Instance scope overrides global scope.
       Time.firstDayOfWeek = 4
       assertEquals(1, t.weekday());
-      Time.firstDayOfWeek = 1
     }
   })
   
   TestCase("Stepping", {
+    tearDown: function () {
+      Time.firstDayOfWeek = 1;
+    },
+    
     "test beginning": function () {
       assertEquals(new Time(2008, 1, 0, 0, 0).s(),    new Time(2008, 5, 17, 15, 30).beginningOfYear().s());
       assertEquals(new Time(2008, 5, 0, 0, 0).s(),    new Time(2008, 5, 17, 15, 30).beginningOfMonth().s());
@@ -158,8 +163,6 @@
     	Time.firstDayOfWeek = 2;
 
     	assertEquals(new Time(2008, 5, 17).beginningOfWeek().s(), new Time(2008, 5, 12).s())
-
-    	Time.firstDayOfWeek = 1;
     },
     
     "test end": function () {
@@ -179,8 +182,6 @@
     	Time.firstDayOfWeek = 2;
 
     	assertEquals(new Time(2008, 5, 17).endOfWeek().s(), new Time(2008, 5, 18).endOfDay().s())
-
-    	Time.firstDayOfWeek = 1;
     },
     
     "test first day in calendar month": function () {
@@ -193,7 +194,6 @@
     	Time.firstDayOfWeek = 2;
     	assertEquals(new Time(2008, 4, 1).firstDayInCalendarMonth().s(), new Time(2008, 3, 31).s())
     	assertEquals(new Time(2008, 3, 1).firstDayInCalendarMonth().s(), new Time(2008, 2, 25).s());
-    	Time.firstDayOfWeek = 1;
     },
     
     "test advance days": function () {
