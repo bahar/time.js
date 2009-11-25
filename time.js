@@ -213,7 +213,13 @@
 
     return this;
   }
-
+  
+  
+  // ------------
+  
+  Time.prototype.toString = function() {
+    return [this.year(), this.month(), this.day()].join(".") + " " + [this.hour(), this.minute(), this.second()].join(":");
+  }
 
   // Todo: Some kind of noConflict() thing, in case people have a 'Time' around already.
   window.Time = Time;
