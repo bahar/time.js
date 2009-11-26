@@ -185,16 +185,13 @@
   // ------------
 
   Time.prototype.advanceDays = function(days) {
-    // I honestly don't know what I'm doing here. The beginningOfDay()
-    // stuff really sucks.
-    var milliseconds
-    if (days < -1) {
-      milliseconds = (86400000 * days) + 3600000
-    } else {
-      milliseconds = 86400000 * days;
-    }
+    // I honestly don't know why I have to add 1 hour here.
+    var milliseconds = (86400000 * days) + 3600000;
+
+    this.beginningOfDay();
     this.epoch(this.epoch() + milliseconds);
-    this.beginningOfDay()
+    this.beginningOfDay();
+
     return this;
   }
 
