@@ -7,7 +7,7 @@
   
   TestCase("Base test", {
     tearDown: function () {
-      Time.firstDayOfWeek = 1;
+      Time.firstDayOfWeek = 0;
     },
     
     "test basic accessors": function () {
@@ -48,7 +48,7 @@
     	assertEquals(7, time.weekday());
     	assertEquals(new Time(2008, 5, 17).s(), time.s());
 
-    	Time.firstDayOfWeek = 2
+    	Time.firstDayOfWeek = 1
 
     	assertEquals(6, new Time(2008, 5, 17).weekday())
     	assertEquals(7, new Time(2008, 5, 18).weekday())
@@ -63,7 +63,7 @@
     	assertEquals(7, time.weekday());
     	assertEquals(new Time(2008, 5, 18).s(), time.s());
 
-    	Time.firstDayOfWeek = 5;
+    	Time.firstDayOfWeek = 4;
     	assertEquals(1, new Time(2008, 5, 15).weekday());
     	assertEquals(7, new Time(2008, 5, 21).weekday());
     },
@@ -140,7 +140,7 @@
       assertEquals(4, new Time(2008, 11, 18).weekOfCurrentMonth());
       assertEquals(6, new Time(2008, 11, 30).weekOfCurrentMonth());
       
-      Time.firstDayOfWeek = 2;
+      Time.firstDayOfWeek = 1;
       
       assertEquals(1, new Time(2008, 11, 1).weekOfCurrentMonth());
       assertEquals(1, new Time(2008, 11, 2).weekOfCurrentMonth());
@@ -153,18 +153,18 @@
       assertEquals(1, new Time(2008, 4, 27).weekday())
 
       var t = new Time(2008, 4, 28);
-      t.firstDayOfWeek = 2;
+      t.firstDayOfWeek = 1;
       assertEquals(1, t.weekday());
 
       // Instance scope overrides global scope.
-      Time.firstDayOfWeek = 4
+      Time.firstDayOfWeek = 3
       assertEquals(1, t.weekday());
     }
   })
   
   TestCase("Stepping", {
     tearDown: function () {
-      Time.firstDayOfWeek = 1;
+      Time.firstDayOfWeek = 0;
     },
     
     "test beginning": function () {
@@ -176,7 +176,7 @@
 
     	assertEquals(new Time(2008, 5, 17).beginningOfWeek().s(), new Time(2008, 5, 11).s())
 
-    	Time.firstDayOfWeek = 2;
+    	Time.firstDayOfWeek = 1;
 
     	assertEquals(new Time(2008, 5, 17).beginningOfWeek().s(), new Time(2008, 5, 12).s())
     },
@@ -195,7 +195,7 @@
 
     	assertEquals(new Time(2008, 5, 12).endOfWeek().s(), new Time(2008, 5, 17).endOfDay().s())
 
-    	Time.firstDayOfWeek = 2;
+    	Time.firstDayOfWeek = 1;
 
     	assertEquals(new Time(2008, 5, 17).endOfWeek().s(), new Time(2008, 5, 18).endOfDay().s())
     },
@@ -207,7 +207,7 @@
 
     	assertEquals(new Time(2008, 4).firstDayInCalendarMonth().s(), new Time(2008, 3, 30).s());
 
-    	Time.firstDayOfWeek = 2;
+    	Time.firstDayOfWeek = 1;
     	assertEquals(new Time(2008, 4, 1).firstDayInCalendarMonth().s(), new Time(2008, 3, 31).s())
     	assertEquals(new Time(2008, 3, 1).firstDayInCalendarMonth().s(), new Time(2008, 2, 25).s());
     },

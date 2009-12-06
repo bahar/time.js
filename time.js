@@ -11,7 +11,7 @@
     }
   };
 
-  Time.firstDayOfWeek = 1;
+  Time.firstDayOfWeek = 0;
   var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   var MILLISECONDS_IN_WEEK = 604800000.0;
   var MILLISECONDS_IN_DAY = 86400000;
@@ -33,7 +33,7 @@
       if (value) {
         this.advanceDays(value - this.weekday());
       } else {
-        var a = (this.date.getDay() - (this.firstDayOfWeek || Time.firstDayOfWeek)) + 1;
+        var a = (this.date.getDay() - (this.firstDayOfWeek || Time.firstDayOfWeek));
         var b = 7;
         var ringModulo = a - Math.floor(a / b) * b;
         return ringModulo + 1;
