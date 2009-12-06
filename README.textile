@@ -1,0 +1,11 @@
+h2. time.js
+
+Framework agnostic time calculation library. Tested in IE6,7,8, Firefox 3.x, Safari 4.x, Chrome 4.x, Opera 10.x.
+
+h2. Download
+
+"Download plain and packed version here.":http://augustl-stuff.s3.amazonaws.com/releases/code/time-dot-js/time-dot-js_1.0.tar.gz
+
+h2. Documentation
+
+Documentation on http://wiki.github.com/augustl/time-dot-js
