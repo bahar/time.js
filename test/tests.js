@@ -223,8 +223,8 @@
     	// This will break with a simple epoch() implementation.
     	assertEquals(new Time(2008, 4).advanceDays(-2).s(), new Time(2008, 3, 30).s());
     	
-    	// An edge case I encountered with the old implementation. Can be safely
-    	// removed if current implementation changes
+      // When I'm running this test, it won't pass if the code isn't aware of daylight saving
+      // swap on november 26th 2008.
       assertEquals(new Time(2008, 10, 26).advanceDays(1).s(), new Time(2008, 10, 27).s());
     },
     

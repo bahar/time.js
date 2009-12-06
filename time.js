@@ -185,11 +185,11 @@
   // ------------
 
   Time.prototype.advanceDays = function(days) {
-    // I honestly don't know why I have to add 1 hour here.
     var milliseconds = (86400000 * days) + 3600000;
 
     this.beginningOfDay();
-    this.epoch(this.epoch() + milliseconds);
+    // Adding 1 hour, in case this is a day where daylight savings change
+    this.epoch(this.epoch() + milliseconds + 3600000);
     this.beginningOfDay();
 
     return this;
