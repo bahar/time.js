@@ -12,11 +12,10 @@
   };
 
   Time.firstDayOfWeek = 1;
-  var DAYS_IN_MONTH = [
-    // Starts at [1].
-    null, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-  ];
+  var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   var MILLISECONDS_IN_WEEK = 604800000.0;
+  var MILLISECONDS_IN_DAY = 86400000;
+  var MILLISECONDS_IN_HOUR = 3600000;
   var THIRTY_TWO_DAYS = 2764800000;
 
   Time.prototype = {
@@ -62,7 +61,7 @@
         return 29;
       }
 
-      return DAYS_IN_MONTH[this.month()];
+      return DAYS_IN_MONTH[this.month() - 1];
     },
 
     weeksInMonth: function(){
@@ -163,11 +162,9 @@
     // ------------
 
     advanceDays: function(days) {
-      var milliseconds = (86400000 * days) + 3600000;
-
       this.beginningOfDay();
       // Adding 1 hour, in case this is a day where daylight savings change
-      this.epoch(this.epoch() + milliseconds + 3600000);
+      this.epoch(this.epoch() + (MILLISECONDS_IN_DAY * days) + MILLISECONDS_IN_HOUR);
       this.beginningOfDay();
 
       return this;
