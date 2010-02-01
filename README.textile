@@ -8,4 +8,4 @@ h2. Download
 
 h2. Documentation
 
-Documentation on "http://wiki.github.com/augustl/time-dot-js":http://wiki.github.com/augustl/time-dot-js
+Documentation on "http://wiki.github.com/augustl/time.js":http://wiki.github.com/augustl/time.js
