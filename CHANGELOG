@@ -1,3 +1,6 @@
+1.0.1
+  * Added `week`, the current week of the year.
+
 1.0
   * firstDayOfWeek is zero indexed for consistency with other languages. For example, in C, 0-6 implies sun-sat and 1-7 implies mon-sun.
 

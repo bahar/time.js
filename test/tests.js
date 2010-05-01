@@ -33,6 +33,21 @@
             now.day(5);
             assertEquals(now.day(), 5);
         },
+
+        "test week": function () {
+            assertEquals(52, new Time(2010, 1, 1).week());
+            assertEquals(1, new Time(2010, 1, 3).week());
+            assertEquals(1, new Time(2010, 1, 4).week());
+            assertEquals(2, new Time(2010, 1, 10).week());
+            assertEquals(2, new Time(2010, 1, 11).week());
+
+            Time.firstDayOfWeek = 1;
+            assertEquals(53, new Time(2010, 1, 1).week());
+            assertEquals(53, new Time(2010, 1, 3).week());
+            assertEquals(1, new Time(2010, 1, 4).week());
+            assertEquals(1, new Time(2010, 1, 10).week());
+            assertEquals(2, new Time(2010, 1, 11).week());
+        },
         
         "test weekday": function () {
             assertEquals(1, new Time(2008, 5, 11).weekday());

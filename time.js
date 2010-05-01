@@ -27,6 +27,20 @@
                 return this.date.getMonth() + 1;
             }
         },
+
+        // The week number of the year, iso8601.
+        week: function (value) {
+            if (value) {
+                throw new Error("Setting week number not implemented yet.");
+            } else {
+                // With thanks to http://github.com/jquery/jquery-ui/blob/37e8dd605da5d99600c0/ui/jquery.ui.datepicker.js#L919
+                var checker = this.clone();
+                checker.day(checker.day() + 4 - checker.weekday());
+                var epoch = checker.epoch();
+                checker.beginningOfYear();
+                return Math.floor(Math.round((epoch - checker.epoch()) / MILLISECONDS_IN_DAY) / 7) + 1;
+            }
+        },
         
         // There is no setDay(), implementing that here.
         weekday: function(value) {
